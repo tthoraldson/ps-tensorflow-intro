@@ -121,31 +121,31 @@ with tf.Session() as sess:
     train_house_size_mean = train_house_size.mean()
     train_house_size_std = train_house_size.std()
 
-    # Plot another graph that animates how Gradient Descent sequentually adjusted size_factor and
-    # price_offset to find the values that returned the "best" fit line
-    fig, ax = plt.subplots()
-    line, = ax.plot(house_size, house_price)
-
-    plt.rcParams["figure.figsize"] = (10,8)
-    plt.title("Gradient Descent Fitting Regression Line")
-    plt.ylabel("Price in USD")
-    plt.xlabel("Size in sq. ft")
-    plt.plot(train_house_size, train_price, "go", label="Training Data")
-    # plt.plot(test_house_size, test_house_price, "mo", label="Test Data")
-
-    def animate(i):
-        line.set_xdata(train_house_size_norm * train_house_size_std + train_house_size_mean) # update the data
-        line.set_ydata((fit_size_factor[i] * train_house_size_norm + fit_price_offsets[i]) * train_price_std + train_price_mean)
-
-    # Init only required for blitting a clean slate
-    def initAnim():
-        line.set_ydata(np.zeros(shape=house_price.shape[0])) # Set y's to 0
-        return line,
-
-    # standard animation initalizer
-    ani = animation.FuncAnimation(fig, animate, frames=np.arange(0, fit_plot_idx), init_func=initAnim,
-                                    interval=1000, blit=True)
-    plt.show()
+    # # Plot another graph that animates how Gradient Descent sequentually adjusted size_factor and
+    # # price_offset to find the values that returned the "best" fit line
+    # fig, ax = plt.subplots()
+    # line, = ax.plot(house_size, house_price)
+    #
+    # plt.rcParams["figure.figsize"] = (10,8)
+    # plt.title("Gradient Descent Fitting Regression Line")
+    # plt.ylabel("Price in USD")
+    # plt.xlabel("Size in sq. ft")
+    # plt.plot(train_house_size, train_price, "go", label="Training Data")
+    # # plt.plot(test_house_size, test_house_price, "mo", label="Test Data")
+    #
+    # def animate(i):
+    #     line.set_xdata(train_house_size_norm * train_house_size_std + train_house_size_mean) # update the data
+    #     line.set_ydata((fit_size_factor[i] * train_house_size_norm + fit_price_offsets[i]) * train_price_std + train_price_mean)
+    #
+    # # Init only required for blitting a clean slate
+    # def initAnim():
+    #     line.set_ydata(np.zeros(shape=house_price.shape[0])) # Set y's to 0
+    #     return line
+    #
+    # # standard animation initalizer
+    # ani = animation.FuncAnimation(fig, animate, frames=np.arange(0, fit_plot_idx), init_func=initAnim,
+    #                                 interval=1000, blit=True)
+    # plt.show()
 
 
 
